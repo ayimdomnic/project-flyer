@@ -26,6 +26,8 @@ class FlyersController extends Controller
      */
     public function create()
     {
+        flash('Hello World', 'This is the message');
+        
         return view ('flyers.create');
     }
 
@@ -39,6 +41,8 @@ class FlyersController extends Controller
     {
       // $this->validate()
          Flyer::create($request->all());
+         
+        // flash('Success!', 'Your flyer has sucessfully been created');
          
          return redirect()->back(); //temporary
     }

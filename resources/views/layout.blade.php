@@ -6,6 +6,7 @@
         <meta charset = "UTF-8">
         <title>Project Flyer</title>
         <link rel ="stylesheet" href="/css/app.css">
+        <link rel ="stylesheet" href="/css/libs.css">
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -31,7 +32,7 @@
         <div class="container">
             @yield('content')
         </div>
-        
+       @include('flash')
         
     </body>
     </html>
