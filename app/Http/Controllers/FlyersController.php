@@ -26,9 +26,8 @@ class FlyersController extends Controller
      */
     public function create()
     {
-        flash('Hello World', 'This is the message');
-        
-        return view ('flyers.create');
+        flash()->overlay('Welcome Aboard', 'This is the message.');
+        return view('flyers.create');
     }
 
     /**
@@ -39,25 +38,31 @@ class FlyersController extends Controller
      */
     public function store(FlyerRequest $request)
     {
-      // $this->validate()
-         Flyer::create($request->all());
-         
-        // flash('Success!', 'Your flyer has sucessfully been created');
-         
-         return redirect()->back(); //temporary
+        Flyer::create($request->all());
+        flash()->success('Success!', 'Your flyer has been created.');
+        return redirect()->back();
     }
-
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($zip, $street)
     {
-        //
+        $flyer = Flyer::locatedAt($zip, $street);
+        return view('flyers.show',compact('flyer'));
     }
-
+    
+    public function addPhoto($zip, $street, Request $request)
+    {
+        $this->validate($request,[
+            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
+        ]);
+        $photo = Photo::fromForm($request->file('photo'));
+        Flyer::locatedAt($zip, $street)->addPhoto($photo);
+        //return view('flyers.show',compact('flyer'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -68,7 +73,6 @@ class FlyersController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -80,7 +84,6 @@ class FlyersController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *

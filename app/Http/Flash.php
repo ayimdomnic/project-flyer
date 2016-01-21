@@ -3,33 +3,29 @@
 namespace App\Http;
 
 
-class Flash {
-
-    public function message($tittle, $message)
+class Flash{
+    public function create($title,$message, $level, $key='flash_message')
     {
-        session()->flash('flash_message', [
-        
-            'tittle' => $tittle,
-            
-            'message'=> $message,
-            
-            'level'  => 'info'
-        
-        
+        session()->flash($key, [
+            'title'   => $title,
+            'message' => $message,
+            'level'   => $level
         ]);
-        
     }
-    
-    
-    public function sucess($title, $message)
+    public function info($title,$message)
     {
-        session()->flash('flash_message',[
-            
-            'tittle' => $tittle,
-            
-            'message'=> $message,
-            
-            'level'  => 'success'
-        ]);
+        return $this->create($title,$message,'info');
+    }
+    public function success($title, $message)
+    {
+        return $this->create($title,$message,'success');
+    }
+    public function error($title, $message)
+    {
+        return $this->create($title,$message,'error');
+    }
+    public function overlay($title, $message, $level = 'success')
+    {
+        return $this->create($title,$message, $level,'flash_message_overlay');
     }
 }
