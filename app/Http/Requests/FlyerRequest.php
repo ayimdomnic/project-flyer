@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Http\Requests;
-
 use App\Http\Requests\Request;
-
 class FlyerRequest extends Request
 {
     /**
@@ -15,7 +12,6 @@ class FlyerRequest extends Request
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,12 +21,12 @@ class FlyerRequest extends Request
     {
         return [
             'street' => 'required',
-            'city'   =>  'required',
-            'zip'   =>  'required',
-            'country'   =>  'required',
-            'state'   =>  'required',
-            'price'   =>  'required | integer',
-            'description'   =>  'required'
+            'city' => 'required',
+            'country' => 'required',
+            'price' => 'required|integer',
+            'zip' => 'required',
+            'description' => 'required',
+            'state' => 'required'
         ];
     }
 }

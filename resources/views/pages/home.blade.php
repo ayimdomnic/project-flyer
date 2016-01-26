@@ -1,14 +1,19 @@
 @extends('layout')
-
 @section('content')
 
-<div class="jumbotron">
-      <div class="container">
+    <div class="jumbotron">
         <h1>Project Flyer</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p>
-            <a href="/flyers/create" class="btn btn-primary"> Create a Flyer</a>
-      </div>
+
+        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point
+            to create something more unique by building on or modifying it.
+        </p>
+        @if(Auth::check())
+            <a href="/auth/register" class="btn btn-primary">Sign Up</a>
+         @else
+            <a href="/flyers/create" class="btn btn-primary">Sign In</a>
+        @endif
     </div>
 
-@endsection
+
+
+@stop
